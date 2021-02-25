@@ -63,13 +63,15 @@ export function createRouteObject(options){
             const {path,url,from,query} = route.router;
             const match = getRouteMatch(route.pattern,path);
 
+            console.log(route);
+            
             if(!route.fallback && match && (route.redirect || route.replace) && (!route.exact || (route.exact && match.exact))){
                 await tick();
                 const nextUrl = makeRedirectURL(path,route.parent && route.parent.pattern,route.redirect);
                 if (route.redirect) {
                     return router.goto(nextUrl);
                 } else {
-                    console.log("in here replace 1");
+                    console.log("in here redirect 1");
                     return router.replaceWith(nextUrl);
                 }
             }
@@ -124,6 +126,7 @@ export function createRouteObject(options){
                     if(fb.redirect || fb.replace) {
                         const nextUrl = makeRedirectURL('/',fb.parent && fb.parent.pattern,fb.redirect);
                         if (fb.redirect) {
+                            console.log("in here redirect 2");
                             router.goto(nextUrl);
                         } else {
                             console.log("in here replace 2");
