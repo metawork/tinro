@@ -25,6 +25,7 @@ export function createRouteObject(options){
         parent,
         fallback: options.fallback,
         redirect: false,
+        replace: false,
         firstmatch: false,
         breadcrumb: null,
         matched: false,
@@ -61,9 +62,14 @@ export function createRouteObject(options){
             const {path,url,from,query} = route.router;
             const match = getRouteMatch(route.pattern,path);
 
-            if(!route.fallback && match && route.redirect && (!route.exact || (route.exact && match.exact))){
+            if(!route.fallback && match && (route.redirect || route.replace) && (!route.exact || (route.exact && match.exact))){
                 await tick();
-                return router.goto(makeRedirectURL(path,route.parent && route.parent.pattern,route.redirect));
+                const nextUrl = makeRedirectURL(path,route.parent && route.parent.pattern,route.redirect);
+                if (route.redirect) {
+                    return router.goto(nextUrl);
+                } else {
+                    return router.replace(nextUrl);
+                }
             }
 
             route.meta = match && {
@@ -113,10 +119,16 @@ export function createRouteObject(options){
                     if(!obj) return;
                 }
                 obj && obj.fallbacks.forEach(fb => {
-                    if(fb.redirect)
-                        router.goto(makeRedirectURL('/',fb.parent && fb.parent.pattern,fb.redirect));
-                    else
+                    if(fb.redirect || fb.replace) {
+                        const nextUrl = makeRedirectURL('/',fb.parent && fb.parent.pattern,fb.redirect);
+                        if (fb.redirect) {
+                            router.goto(nextUrl);
+                        } else {
+                            router.replace(nextUrl);
+                        }
+                    } else {
                         fb.show();
+                    }
                 });
             }
         }
