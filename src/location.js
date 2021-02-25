@@ -46,7 +46,6 @@ function createLocation(){
 }
 
 function setLocation(MODE,href){
-    console.log("SET LOCATION");
     MODES.run( MODE,
         _ => history.pushState({}, '', href),
         _ => window.location.hash=href,
