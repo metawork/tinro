@@ -31,12 +31,10 @@ function createLocation(){
         mode: mode => setMode(mode),
         get: _ => getLocation(MODE),
         go(href){
-            console.log("go(href)");
             setLocation(MODE,href);
             dispatch();
         },
         replace(href){
-            console.log("going to replace 3");
             replaceLocation(MODE,href);
             dispatch();
         },
@@ -52,7 +50,6 @@ function createLocation(){
 }
 
 function replaceLocation(MODE,href){
-    console.log("Replacing location", href);
     MODES.run( MODE,
         _ => history.replaceState({}, '', href),
         _ => window.location.hash=href,
@@ -61,7 +58,6 @@ function replaceLocation(MODE,href){
 }
 
 function setLocation(MODE,href){
-    console.log("SET LOCATION (new)");
     MODES.run( MODE,
         _ => history.pushState({}, '', href),
         _ => window.location.hash=href,
