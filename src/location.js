@@ -31,6 +31,7 @@ function createLocation(){
         mode: mode => setMode(mode),
         get: _ => getLocation(MODE),
         go(href){
+            console.log("go(href)");
             setLocation(MODE,href);
             dispatch();
         },
@@ -60,7 +61,7 @@ function replaceLocation(MODE,href){
 }
 
 function setLocation(MODE,href){
-    console.log("SET LOCATION");
+    console.log("SET LOCATION (new)");
     MODES.run( MODE,
         _ => history.pushState({}, '', href),
         _ => window.location.hash=href,

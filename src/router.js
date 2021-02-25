@@ -11,6 +11,7 @@ function routerStore(){
 
     const {subscribe} = writable(location.get(), set => {
         location.start(set);
+        console.log("setting up some listener");
         let un = aClickListener(location.go)
         return ()=>{
             location.stop();

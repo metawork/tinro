@@ -69,6 +69,7 @@ export function createRouteObject(options){
                 await tick();
                 const nextUrl = makeRedirectURL(path,route.parent && route.parent.pattern,route.redirect);
                 if (route.redirect) {
+                    console.log("going going gone");
                     return router.goto(nextUrl);
                 } else {
                     console.log("in here redirect 1");
@@ -127,6 +128,7 @@ export function createRouteObject(options){
                         const nextUrl = makeRedirectURL('/',fb.parent && fb.parent.pattern,fb.redirect);
                         if (fb.redirect) {
                             console.log("in here redirect 2");
+                            console.log("going going gone");
                             router.goto(nextUrl);
                         } else {
                             console.log("in here replace 2");
