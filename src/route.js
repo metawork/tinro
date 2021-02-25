@@ -36,6 +36,7 @@ export function createRouteObject(options){
             route.exact = !opts.path.endsWith('/*');
             route.pattern = formatPath(`${route.parent && route.parent.pattern || ''}${opts.path}`)
             route.redirect = opts.redirect;
+            route.replace = opts.replace;
             route.firstmatch = opts.firstmatch;
             route.breadcrumb = opts.breadcrumb;
             route.match();
