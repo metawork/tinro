@@ -68,6 +68,7 @@ export function createRouteObject(options){
             if(!route.fallback && match && route.redirect && (!route.exact || (route.exact && match.exact))){
                 await tick();
                 const nextUrl = makeRedirectURL(path,route.parent && route.parent.pattern,route.redirect);
+                console.log("next url 1:", nextUrl);
                 if (route.replace) {
                     console.log("in here redirect 1");
                     return router.replaceWith(nextUrl);
@@ -126,6 +127,7 @@ export function createRouteObject(options){
                 obj && obj.fallbacks.forEach(fb => {
                     if(fb.redirect) {
                         const nextUrl = makeRedirectURL('/',fb.parent && fb.parent.pattern,fb.redirect);
+                        console.log("next url 2:", nextUrl);
                         if (fb.replace) {
                             console.log("in here replace 2");
                             router.replaceWith(nextUrl);
