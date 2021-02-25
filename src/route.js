@@ -68,7 +68,8 @@ export function createRouteObject(options){
                 if (route.redirect) {
                     return router.goto(nextUrl);
                 } else {
-                    return router.replace(nextUrl);
+                    console.log("in here replace 1");
+                    return router.replaceWith(nextUrl);
                 }
             }
 
@@ -124,7 +125,8 @@ export function createRouteObject(options){
                         if (fb.redirect) {
                             router.goto(nextUrl);
                         } else {
-                            router.replace(nextUrl);
+                            console.log("in here replace 2");
+                            router.replaceWith(nextUrl);
                         }
                     } else {
                         fb.show();

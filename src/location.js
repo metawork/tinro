@@ -35,6 +35,7 @@ function createLocation(){
             dispatch();
         },
         replace(href){
+            console.log("going to replace 3");
             replaceLocation(MODE,href);
             dispatch();
         },
