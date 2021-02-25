@@ -52,7 +52,7 @@ function createLocation(){
 }
 
 function replaceLocation(MODE,href){
-    console.log("Replacing location");
+    console.log("Replacing location", href);
     MODES.run( MODE,
         _ => history.replaceState({}, '', href),
         _ => window.location.hash=href,
