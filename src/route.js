@@ -63,7 +63,7 @@ export function createRouteObject(options){
             const {path,url,from,query} = route.router;
             const match = getRouteMatch(route.pattern,path);
 
-            console.log(route);
+            console.log("route", route);
             
             if(!route.fallback && match && (route.redirect || route.replace) && (!route.exact || (route.exact && match.exact))){
                 await tick();
